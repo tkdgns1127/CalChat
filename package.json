@@ -1,0 +1,28 @@
+{
+  "name": "CalChat",
+  "version": "1.0.0",
+  "description": "캘챗은 구글 캘린더와 연동되어 사용자의 일정 관리를 도와주는 대화형 챗봇입니다. 자연어 처리 기반 인터페이스를 통해 일정 조회, 추가, 수정 등의 기능을 손쉽게 이용할 수 있습니다.",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^144.0.0",
+    "open": "^10.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkdgns1127/CalChat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tkdgns1127/CalChat/issues"
+  },
+  "homepage": "https://github.com/tkdgns1127/CalChat#readme"
+}

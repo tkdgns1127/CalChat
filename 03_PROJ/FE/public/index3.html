@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Google Identity Services 라이브러리 -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- Google Fonts: Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* 전체 화면 설정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f4f4f4; /* 아래쪽 영역이 살짝 구분되도록 연한 배경색 */
+    }
+
+    /* 컨테이너: 상단 그라디언트 + 하단 폼 영역 */
+    .signup-container {
+      width: 360px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    /* 상단 헤더: 그라디언트 배경과 원형 패턴 */
+    .signup-header {
+      position: relative;
+      padding: 2rem;
+      background: linear-gradient(135deg, #6A82FB 0%, #FC5C7D 100%);
+      color: #fff;
+      text-align: center;
+    }
+    .signup-header h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .signup-header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* 원형 패턴 효과: 겹치는 원형을 사용해 장식 */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.2;
+      pointer-events: none; /* 클릭 불가 처리 */
+    }
+    .circle.one {
+      width: 200px;
+      height: 200px;
+      top: -50px;
+      left: -50px;
+      background: #ffffff;
+    }
+    .circle.two {
+      width: 150px;
+      height: 150px;
+      bottom: 0;
+      right: -30px;
+      background: #ffffff;
+    }
+
+    /* 폼 영역 */
+    .signup-form {
+      padding: 2rem;
+    }
+    .signup-form label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+      color: #555;
+    }
+    .signup-form input {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.6rem;
+      margin-bottom: 1.2rem;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .signup-form input:focus {
+      border-color: #6A82FB;
+    }
+
+    /* 가입 버튼 */
+    .signup-form button {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #6A82FB 0%, #FC5C7D 100%);
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .signup-form button:hover {
+      opacity: 0.9;
+    }
+    .sns-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .sns-icons img {
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .sns-icons img:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Google 아이콘에 원형 테두리 적용 */
+    .sns-icons img[alt="Google"] {
+      border: 2px solid #4285F4;
+      border-radius: 50%;
+      padding: 5px;
+    }
+  </style>
+  <script>
+// 1) Google Identity Services 초기화
+window.onload = function() {
+      google.accounts.id.initialize({
+        client_id: "YOUR_CLIENT_ID.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
+      
+      // 2) "Sign in with Google" 버튼 렌더링
+      google.accounts.id.renderButton(
+        document.getElementById("googleSignInButton"),
+        { theme: "outline", size: "large", text: "continue_with" }
+      );
+    };
+
+    // 3) 로그인 성공 시 호출되는 콜백 함수
+    function handleCredentialResponse(response) {
+      // ID 토큰(jwt)을 받게 됨
+      const idToken = response.credential;
+      
+      // 디코딩 혹은 서버에 전송하여 사용자 정보를 확인할 수 있음
+      // 여기서는 간단히 화면에 표시만 해볼게
+      document.getElementById("userInfo").innerText =
+        "로그인 성공! ID 토큰: " + idToken;
+      
+      // 실제로는 이 토큰을 서버로 보내 사용자 정보 검증 후 세션/토큰 발급
+      // 또는 jwt 디코딩 라이브러리 등을 사용해 사용자 프로필 일부 확인 가능
+    }
+  </script>
+
+</head>
+<body>
+  <div class="signup-container">
+    <!-- 상단 헤더 (그라디언트 + 원형 패턴) -->
+    <div class="signup-header">
+      <div class="circle one"></div>
+      <div class="circle two"></div>
+      <h1>Create your account</h1>
+      <p>parra.guillaume@gmail.com</p>
+    </div>
+    <!-- 폼 영역 -->
+    <div class="signup-form">
+        <div class="sns-icons">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" />
+        </div>
+        
+      <!--
+      <label for="username">USERNAME</label>
+      <input type="text" id="username" name="username" placeholder="parra.guillaume" />
+
+      <label for="password">PASSWORD</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" />
+-->
+      <button type="submit">SIGN UP</button>
+    </div>
+  </div>
+</body>
+</html>
